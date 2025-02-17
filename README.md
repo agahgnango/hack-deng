@@ -40,7 +40,7 @@ To use the data in this repository, follow these steps:
 3. Explore the data directories and use the files as needed for your analysis or research.
 4. Run the setup script using Azure CLI
     ```bash
-    ./setup.sh
+    curl -sL https://raw.githubusercontent.com/agahgnango/hack-deng/main/setup.sh | bash
     ```
 
 ## Contributing
