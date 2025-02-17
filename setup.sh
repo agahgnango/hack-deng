@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-resourceGroupName="demo-dp-203-rg"
+resourceGroupName="course-dp-203-rg"
 location="EastUS"
 storageAccountName="ehradlsgen2"
 synapseWorkspaceName="ehrsynapsews"
