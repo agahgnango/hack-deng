@@ -1,0 +1,14 @@
+DoctorID,FirstName,LastName,Specialty,PhoneNumber,Email
+281,Carlos,Grilo,Oncology,128.895.4812,Carlos.Grilo@.example.com
+282,Tom,Getzinger,Gastroenterology,999.999.9999,Tom.Getzinger@.example.com
+283,Kirk,Gregersen,Cardiology,999.999.9999,Kirk.Gregersen@.example.com
+284,Leo,Giakoumakis,Radiology,206.961.0597,Leo.Giakoumakis@.example.com
+285,Nikolay,Grachev,Pediatrics,999.999.9999,Nikolay.Grachev@.example.com
+286,Enrique,Gil,Psychiatry,999.999.9999,Enrique.Gil@.example.com
+287,Mojca,Gostincar,Cardiology,202.616.5549,Mojca.Gostincar@.example.com
+288,Eric,Gilmore,Neurology,148.899.4422,Eric.Gilmore@.example.com
+289,Nuria,Gonzalez,Surgery,104.140.1182,Nuria.Gonzalez@.example.com
+290,Stuart,Glasson,Pediatrics,139.708.8924,Stuart.Glasson@.example.com
+291,Daniel,Goldschmidt,Pediatrics,999.999.9999,Daniel.Goldschmidt@.example.com
+292,Gerhard,Goeschl,Neurology,999.999.9999,Gerhard.Goeschl@.example.com
+293,Jossef,Goldberg,Psychiatry,137.553.6198,Jossef.Goldberg@.example.com
