@@ -39,11 +39,15 @@ echo "🔹 Creating Data container for uploads..."
 az storage container create --name $dataContainerName --account-name $storageAccountName --account-key $storageAccountKey
 
 # === CLONE GITHUB REPO AND UPLOAD DATA ===
-echo "🔹 Cloning GitHub repository and uploading data..."
-git clone $githubRepoUrl
+if [ ! -d "hack-deng" ]; then
+    echo "🔹 Cloning GitHub repository..."
+    git clone $githubRepoUrl
+fi
+
 cd hack-deng/sample-data
 
 # Upload data to the new "data" container
+echo "🔹 Uploading data to the data container..."
 az storage blob upload-batch --destination $dataContainerName --source . --account-name $storageAccountName --account-key $storageAccountKey
 
 cd ..  # Return to original directory
