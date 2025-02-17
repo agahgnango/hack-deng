@@ -10,7 +10,6 @@ synapseSqlAdminPassword="!QAZ@WSX3edc4rfv"
 fileSystemName="synapse"
 dataContainerName="data"
 githubRepoUrl="https://github.com/agahgnango/hack-deng.git"
-localDataPath="./sample-data"
 
 # Get current user's object ID from Azure AD
 echo "Getting current user's Azure AD Object ID..."
@@ -88,17 +87,19 @@ az role assignment create --assignee $USER_OBJECT_ID --role "Storage Blob Data C
 echo "Adding current IP '$CURRENT_IP' to firewall rules for Storage Account '$storageAccountName'..."
 az storage account network-rule add --resource-group $resourceGroupName --account-name $storageAccountName --ip-address $CURRENT_IP
 
-# Add the current IP address to the firewall rules for Synapse Workspace
-echo "Adding current IP '$CURRENT_IP' to firewall rules for Synapse Workspace '$synapseWorkspaceName'..."
-az synapse workspace firewall-rule create --name "AllowMyIP" --workspace-name $synapseWorkspaceName --resource-group $resourceGroupName --start-ip-address $CURRENT_IP --end-ip-address $CURRENT_IP
-
-# Add firewall rule to allow all IP addresses
-echo "Adding firewall rule to allow all IPs for Synapse Workspace..."
+# Add firewall rule to allow all IPs (0.0.0.0 to 255.255.255.255) for Synapse Workspace
+echo "Adding firewall rule to allow all IPs for Synapse Workspace '$synapseWorkspaceName'..."
 az synapse workspace firewall-rule create --name "AllowAllIPs" --workspace-name $synapseWorkspaceName --resource-group $resourceGroupName --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
 
-# Create Linked Service for ADLS Gen2 in Synapse
-echo "Creating Linked Service 'SynapsePrimaryDatalakeLS' for ADLS Gen2 in Synapse..."
-az synapse linked-service create --workspace-name $synapseWorkspaceName --name "SynapsePrimaryDatalakeLS" --type "AzureBlobStorage" --properties "{\"typeProperties\":{\"serviceEndpoint\":\"https://$storageAccountName.dfs.core.windows.net\",\"accountKey\":\"$storageAccountKey\"}}"
+# Create Linked Service to ADLS Gen2 using Access Key in Synapse
+echo "Creating Linked Service 'SynapseWsPrimeAdls' in Synapse..."
+az synapse linked-service create --workspace-name $synapseWorkspaceName --name "SynapseWsPrimeAdls" --properties "{
+  \"type\": \"AzureBlobFS\",
+  \"typeProperties\": {
+    \"url\": \"https://$storageAccountName.dfs.core.windows.net\",
+    \"accountKey\": \"$storageAccountKey\"
+  }
+}"
 
 # Output
 echo "Data Lake Storage Gen2 and Synapse Analytics resources have been provisioned successfully."
