@@ -3,9 +3,9 @@
 # Variables
 resourceGroupName="demo-dp-203-rg"
 location="EastUS"
-storageAccountName="ehradlsgen2"
-synapseWorkspaceName="ehrsynapsews"
-synapseSqlAdminUser="ehrSqlAdmin"
+storageAccountName="lhehradlsgen2"
+synapseWorkspaceName="lhehrsynapsews"
+synapseSqlAdminUser="SqlDbAdmin"
 synapseSqlAdminPassword="!QAZ@WSX3edc4rfv"
 fileSystemName="synapse"
 dataContainerName="data"
