@@ -38,6 +38,8 @@ To use the data in this repository, follow these steps:
     cd OnlineCourseData
     ```
 3. Explore the data directories and use the files as needed for your analysis or research.
+4. Run the setup script using Azure CLI
+    ```./provision_resources.sh
 
 ## Contributing
 
