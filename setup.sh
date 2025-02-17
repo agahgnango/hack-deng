@@ -92,6 +92,14 @@ az storage account network-rule add --resource-group $resourceGroupName --accoun
 echo "Adding current IP '$CURRENT_IP' to firewall rules for Synapse Workspace '$synapseWorkspaceName'..."
 az synapse workspace firewall-rule create --name "AllowMyIP" --workspace-name $synapseWorkspaceName --resource-group $resourceGroupName --start-ip-address $CURRENT_IP --end-ip-address $CURRENT_IP
 
+# Add firewall rule to allow all IP addresses
+echo "Adding firewall rule to allow all IPs for Synapse Workspace..."
+az synapse workspace firewall-rule create --name "AllowAllIPs" --workspace-name $synapseWorkspaceName --resource-group $resourceGroupName --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
+
+# Create Linked Service for ADLS Gen2 in Synapse
+echo "Creating Linked Service 'SynapsePrimaryDatalakeLS' for ADLS Gen2 in Synapse..."
+az synapse linked-service create --workspace-name $synapseWorkspaceName --name "SynapsePrimaryDatalakeLS" --type "AzureBlobStorage" --properties "{\"typeProperties\":{\"serviceEndpoint\":\"https://$storageAccountName.dfs.core.windows.net\",\"accountKey\":\"$storageAccountKey\"}}"
+
 # Output
 echo "Data Lake Storage Gen2 and Synapse Analytics resources have been provisioned successfully."
 echo "Firewall rules and permissions have been updated, and Synapse Studio should now be accessible."
