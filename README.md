@@ -1,9 +1,12 @@
-# Instructor-Led Online Course Data Repository
+# DP-203 Demo Repository
 
-Welcome to the Instructor-Led Online Course Data Repository! This repository contains data and resources related to our instructor-led online courses. The data is organized to facilitate easy access and analysis for educational and research purposes.
+Welcome to the DP-203 Demo Repository! This repository contains the requirements and sample data for lecture demos during the DP-203 Azure Data Engineering course. The data is organized to facilitate easy access and analysis for educational and research purposes.
 
 ## Table of Contents
 
+- *Introduction to BrightHope Children's Hospital (module 1).*
+- *DE team is Not sure where to start from? I only know SQL (module 2).*
+- *An external link was removed to protect your privacy.*
 - *An external link was removed to protect your privacy.*
 - *An external link was removed to protect your privacy.*
 - *An external link was removed to protect your privacy.*
@@ -18,11 +21,9 @@ This repository hosts data from various instructor-led online courses. The data 
 ## Data Structure
 
 The data is organized into the following directories:
-
-- **CourseMaterials/**: Contains lecture notes, slides, and other course materials.
-- **StudentData/**: Includes anonymized student performance metrics, attendance records, and feedback.
-- **Assignments/**: Contains assignment descriptions, solutions, and grading rubrics.
-- **Exams/**: Includes exam questions, solutions, and grading criteria.
+- **sample-data/**: Contains Electronic Health Record (EHR) data from three branches of the BrightHope Children's Hospital: NY, GA, and TX (the last one branch coming in later in the course).
+- **requirements/**: Contains Hospital requirement at each stage of its growth, solutions.
+- **Solution/**: Includes anonymized student performance metrics, attendance records, and feedback.
 
 ## Usage
 
