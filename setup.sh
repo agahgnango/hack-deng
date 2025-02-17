@@ -1,5 +1,5 @@
 # Variables
-resourceGroupName="demo-dp-203-rg"
+resourceGroupName="dp-203-rg"
 location="EastUS"
 storageAccountName="ehradlsgen2"
 containerName="Data"
