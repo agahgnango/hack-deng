@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Variables
-resourceGroupName="course-dp-203-rg"
+resourceGroupName="demo-dp-203-rg"
 location="EastUS"
-storageAccountName="hlehradlsgen2"
-synapseWorkspaceName="hlehrsynapsews"
-synapseSqlAdminUser="SqlDba"
+storageAccountName="ehradlsgen2"
+synapseWorkspaceName="ehrsynapsews"
+synapseSqlAdminUser="ehrSqlAdmin"
 synapseSqlAdminPassword="!QAZ@WSX3edc4rfv"
 fileSystemName="synapsefs"
 dataContainerName="data"
@@ -73,13 +73,10 @@ az synapse workspace create --name $synapseWorkspaceName \
     --sql-admin-login-password $synapseSqlAdminPassword \
     --location $location
 
-# Enable public network access for Synapse Workspace
-echo "Enabling public network access for Synapse Workspace '$synapseWorkspaceName'..."
-az synapse workspace update --name $synapseWorkspaceName --resource-group $resourceGroupName --public-network-access Enabled
-
 # Assign necessary roles for the current user
 echo "Assigning Synapse Administrator role to user..."
 az synapse role assignment create --workspace-name $synapseWorkspaceName --role "Synapse Administrator" --assignee $USER_OBJECT_ID
+
 echo "Assigning Synapse SQL Administrator role to user..."
 az synapse role assignment create --workspace-name $synapseWorkspaceName --role "Synapse SQL Administrator" --assignee $USER_OBJECT_ID
 
@@ -93,7 +90,7 @@ az storage account network-rule add --resource-group $resourceGroupName --accoun
 
 # Add the current IP address to the firewall rules for Synapse Workspace
 echo "Adding current IP '$CURRENT_IP' to firewall rules for Synapse Workspace '$synapseWorkspaceName'..."
-az synapse workspace firewall-rule create --workspace-name $synapseWorkspaceName --name "AllowMyIP" --start-ip-address $CURRENT_IP --end-ip-address $CURRENT_IP
+az synapse workspace firewall-rule create --name "AllowMyIP" --workspace-name $synapseWorkspaceName --resource-group $resourceGroupName --start-ip-address $CURRENT_IP --end-ip-address $CURRENT_IP
 
 # Output
 echo "Data Lake Storage Gen2 and Synapse Analytics resources have been provisioned successfully."
