@@ -72,14 +72,23 @@ az synapse workspace create --name $synapseWorkspaceName \
     --sql-admin-login-password $synapseSqlAdminPassword \
     --location $location
 
-# Assign necessary roles for the current user
+# Get Synapse Managed Identity Object ID
+echo "Retrieving Synapse Managed Identity Object ID..."
+SYNAPSE_MI_OBJECT_ID=$(az synapse workspace show --name $synapseWorkspaceName --resource-group $resourceGroupName --query "identity.principalId" --output tsv)
+echo "Synapse Managed Identity Object ID: $SYNAPSE_MI_OBJECT_ID"
+
+# Assign Storage Blob Data Contributor role to Synapse Managed Identity
+echo "Assigning 'Storage Blob Data Contributor' role to Synapse Managed Identity for Storage Account '$storageAccountName'..."
+az role assignment create --assignee $SYNAPSE_MI_OBJECT_ID --role "Storage Blob Data Contributor" --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccountName"
+
+# Assign Synapse roles to the current user
 echo "Assigning Synapse Administrator role to user..."
 az synapse role assignment create --workspace-name $synapseWorkspaceName --role "Synapse Administrator" --assignee $USER_OBJECT_ID
 
 echo "Assigning Synapse SQL Administrator role to user..."
 az synapse role assignment create --workspace-name $synapseWorkspaceName --role "Synapse SQL Administrator" --assignee $USER_OBJECT_ID
 
-# Assign Storage Blob Data Contributor role to the user for the storage account
+# Assign Storage Blob Data Contributor role to the current user
 echo "Assigning Storage Blob Data Contributor role to user for Storage Account '$storageAccountName'..."
 az role assignment create --assignee $USER_OBJECT_ID --role "Storage Blob Data Contributor" --scope "/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccountName"
 
@@ -90,6 +99,16 @@ az storage account network-rule add --resource-group $resourceGroupName --accoun
 # Add firewall rule to allow all IPs (0.0.0.0 to 255.255.255.255) for Synapse Workspace
 echo "Adding firewall rule to allow all IPs for Synapse Workspace '$synapseWorkspaceName'..."
 az synapse workspace firewall-rule create --name "AllowAllIPs" --workspace-name $synapseWorkspaceName --resource-group $resourceGroupName --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
+
+# Update Synapse Workspace Default Storage (WorkspaceDefaultStorage) to use Account Key authentication
+echo "Updating 'WorkspaceDefaultStorage' linked service in Synapse to use Account Key authentication..."
+az synapse linked-service create --workspace-name $synapseWorkspaceName --name "WorkspaceDefaultStorage" --properties "{
+  \"type\": \"AzureBlobFS\",
+  \"typeProperties\": {
+    \"url\": \"https://$storageAccountName.dfs.core.windows.net\",
+    \"accountKey\": \"$storageAccountKey\"
+  }
+}"
 
 # Create Linked Service to ADLS Gen2 using Access Key in Synapse
 echo "Creating Linked Service 'SynapseWsPrimeAdls' in Synapse..."
