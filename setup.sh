@@ -3,9 +3,9 @@
 # Variables
 resourceGroupName="course-dp-203-rg"
 location="EastUS"
-storageAccountName="ehradlsgen2"
-synapseWorkspaceName="ehrsynapsews"
-synapseSqlAdminUser="ehrSqlAdmin"
+storageAccountName="hlehradlsgen2"
+synapseWorkspaceName="hlehrsynapsews"
+synapseSqlAdminUser="SqlDba"
 synapseSqlAdminPassword="!QAZ@WSX3edc4rfv"
 fileSystemName="synapsefs"
 dataContainerName="data"
