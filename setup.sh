@@ -1,12 +1,12 @@
 # Variables
-resourceGroupName="dp-203-rg"
+resourceGroupName="demo-dp-203-rg"
 location="EastUS"
 storageAccountName="ehradlsgen2"
 containerName="data"
 synapseWorkspaceName="ehrsynapsews"
 synapseSqlAdminUser="ehrSqlAdmin"
 synapseSqlAdminPassword="!QAZ@WSX3edc4rfv"
-fileSystemName="datalake"
+fileSystemName="synapsefs"
 
 # Login to Azure
 az login
