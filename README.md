@@ -4,7 +4,7 @@ Welcome to the DP-203 Demo Repository! This repository contains the requirements
 
 ## Table of Contents
 
-- *Introduction to BrightHope Children's Hospital (module 1).*
+- *Introduction to LifeHope's Hospital (module 1).*
 - *DE team is Not sure where to start from? I only know SQL (module 2).*
 - *An external link was removed to protect your privacy.*
 - *An external link was removed to protect your privacy.*
@@ -21,7 +21,7 @@ This repository hosts data from various instructor-led online courses. The data 
 ## Data Structure
 
 The data is organized into the following directories:
-- **sample-data/**: Contains Electronic Health Record (EHR) data from three branches of the BrightHope Children's Hospital: NY, GA, and TX (the last one branch coming in later in the course).
+- **sample-data/**: Contains Electronic Health Record (EHR) data from three branches of the LifeHope's Hospital: NY, GA, and TX (the last one branch coming in later in the course).
 - **requirements/**: Contains Hospital requirement at each stage of its growth, solutions.
 - **Solution/**: Includes anonymized student performance metrics, attendance records, and feedback.
 
